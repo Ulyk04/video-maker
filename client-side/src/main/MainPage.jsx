@@ -9,6 +9,11 @@ import VideoCall from '@mui/icons-material/VideoCall';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { DemoProvider, useDemoRouter } from '@toolpad/core/internal';
+import { Grid } from '@mui/material';
+import { PageContainer } from '@toolpad/core/PageContainer';
+import Upload from '../component/Upload';
+import Edit from '../component/Edit';
+import Export from '../component/Export';
 
 const NAVIGATION = [
   {
@@ -22,7 +27,7 @@ const NAVIGATION = [
     icon: <Settings />,
   },
   {
-    segment: 'Export',
+    segment: 'export',
     title: 'Export',
     icon: <VideoCall />,
   }
@@ -132,7 +137,31 @@ function DashboardLayoutBranding(props) {
         window={demoWindow}
       >
         <DashboardLayout>
-          <DemoPageContent pathname={router.pathname} />
+          <PageContainer sx={{backgroundColor:'background.default' ,minHeight: '100vh' , p: 2 }} >
+              <Grid>
+                <Grid>
+                  {
+                    router.pathname === '/upload' && (
+                      <Upload />
+                    )
+                  }
+                </Grid>
+                <Grid>
+                  {
+                    router.pathname === '/edit' && (
+                      <Edit />
+                    )
+                  }
+                </Grid>
+                <Grid>
+                  {
+                  router.pathname === '/export' && (
+                    <Export />
+                  )
+                  }
+                </Grid>
+              </Grid>
+          </PageContainer>
         </DashboardLayout>
       </AppProvider>
      
