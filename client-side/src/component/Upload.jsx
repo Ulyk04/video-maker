@@ -1,9 +1,10 @@
-import { Card, CardContent, Input } from '@mui/material'
+import { Button, Card, CardContent, Input } from '@mui/material'
 import React from 'react'
 
 const Upload = () => {
 
     const [videoTitle, setVideoTitle] = React.useState('');
+    const [step, setStep] = React.useState("upload");
 
   return (
     <div>
@@ -16,7 +17,8 @@ const Upload = () => {
                     sx={{width: '100%'}}
                     value={videoTitle}
                     onChange={(e) => setVideoTitle(e.target.value)}
-                />
+                /> <br /> <br />
+                <Button onClick={() => setStep("edit")} variant='contained' >Next: Edit</Button>
             </CardContent>
         </Card>
     </div>
