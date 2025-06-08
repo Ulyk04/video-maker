@@ -6,6 +6,34 @@ const Upload = () => {
     const [videoTitle, setVideoTitle] = React.useState('');
     const [step, setStep] = React.useState("upload");
 
+    const handleNextClick = async () => {
+        const file = fileInputRef.current.files[0];
+        if (videoTitle && file) {
+            const formData = new FormData();
+            formData.append('video', file); 
+            formData.append('title', videoTitle); 
+    
+            try {
+                const response = await fetch('http://localhost:5000/upload', { 
+                    method: 'POST',
+                    body: formData,
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    console.log('Upload successful:', data);
+                    onUploadComplete(videoTitle, data.filePath); 
+                } else {
+                    alert(`Upload failed: ${data.message || response.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error uploading video:', error);
+                alert('An error occurred during upload.');
+            }
+        } else {
+            alert('Please enter a video title and select a video file.');
+        }
+    };
+
   return (
     <div>
         <Card>
