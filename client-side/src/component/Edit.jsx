@@ -9,6 +9,8 @@ const Edit = () => {
       <Card>
         <CardContent>
           <p style={{fontSize: '150%'}}>Basic editing options would go here. Add text, trim, music, etc.</p>
+          <Button variant='contained'>Edit</Button>
+          <br/> <br/>
           <Button onClick={() => setStep("export")} variant = 'contained' >Next: Export</Button>
         </CardContent>
       </Card>
