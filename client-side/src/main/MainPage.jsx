@@ -102,7 +102,7 @@ function DashboardLayoutBranding(props) {
 
   const [videoTitle, setVideoTitle] = React.useState('');
   const [uploadedVideoFile, setUploadedVideoFile] = React.useState(null);
-
+  const [finalEditedVideoUrl, setFinalEditedVideoUrl] = React.useState('');
  
   const demoWindow = window !== undefined ? window() : undefined;
 
@@ -115,6 +115,7 @@ function DashboardLayoutBranding(props) {
   const handleEditComplete = (editedVideoUrl) => {
     console.log('Editing complete. Edited video URL:', editedVideoUrl);
     router.push('/export');
+    setFinalEditedVideoUrl(editedVideoUrl);
   }
 
   return (
@@ -161,7 +162,9 @@ function DashboardLayoutBranding(props) {
                 <Grid>
                   {
                   router.pathname === '/export' && (
-                    <Export />
+                    <Export
+                      finalEditedVideoUrl={finalEditedVideoUrl}
+                    />
                   )
                   }
                 </Grid>
