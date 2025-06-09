@@ -93,33 +93,29 @@ const demoTheme = createTheme({
   },
 });
 
-function DemoPageContent({ pathname }) {
-  return (
-    <Box
-      sx={{
-        py: 4,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-      }}
-    >
-      <Typography>Dashboard content for {pathname}</Typography>
-    </Box>
-  );
-}
 
-DemoPageContent.propTypes = {
-  pathname: PropTypes.string.isRequired,
-};
 
 function DashboardLayoutBranding(props) {
   const { window } = props;
 
-  const router = useDemoRouter('/dashboard');
+  const router = useDemoRouter('/upload');
+
+  const [videoTitle, setVideoTitle] = React.useState('');
+  const [uploadedVideoFile, setUploadedVideoFile] = React.useState(null);
 
  
   const demoWindow = window !== undefined ? window() : undefined;
+
+  const handleUploadComplete = (title, filePath) => {
+    setVideoTitle(title);
+    setUploadedVideoFile(filePath);
+    router.push('/edit');
+  }
+
+  const handleEditComplete = (editedVideoUrl) => {
+    console.log('Editing complete. Edited video URL:', editedVideoUrl);
+    router.push('/export');
+  }
 
   return (
 
@@ -138,18 +134,27 @@ function DashboardLayoutBranding(props) {
       >
         <DashboardLayout>
           <PageContainer sx={{backgroundColor:'background.default' ,minHeight: '100vh' , p: 2 }} >
-              <Grid>
-                <Grid>
+              <Grid container spacing={2} justifyContent="center" alignItems="flex-start" >
+                <Grid item xs={12} sm={8} md={6} lg={4} >
                   {
                     router.pathname === '/upload' && (
-                      <Upload />
+                      <Upload 
+                        videoTitle={videoTitle}
+                        setVideoTitle={setVideoTitle}
+                        onUploadComplete={handleUploadComplete}
+                      />
                     )
                   }
                 </Grid>
                 <Grid>
                   {
                     router.pathname === '/edit' && (
-                      <Edit />
+                      <Edit
+                        videoTitle={videoTitle}
+                        uploadedVideoFile={uploadedVideoFile}
+                        setStep={() => {}} 
+                        onEditComplete={handleEditComplete} 
+                      />
                     )
                   }
                 </Grid>

@@ -1,27 +1,27 @@
 import { Button, Card, CardContent, Input } from '@mui/material'
 import React from 'react'
 
-const Upload = () => {
-
-    const [videoTitle, setVideoTitle] = React.useState('');
-    const [step, setStep] = React.useState("upload");
+// Принимаем пропсы из родительского компонента
+const Upload = ({ videoTitle, setVideoTitle, onUploadComplete }) => {
+    const fileInputRef = React.useRef(null);
 
     const handleNextClick = async () => {
         const file = fileInputRef.current.files[0];
         if (videoTitle && file) {
             const formData = new FormData();
-            formData.append('video', file); 
-            formData.append('title', videoTitle); 
-    
+            formData.append('video', file);
+            formData.append('title', videoTitle);
+
             try {
-                const response = await fetch('http://localhost:5000/upload', { 
+                const response = await fetch('http://localhost:5000/upload', {
                     method: 'POST',
                     body: formData,
                 });
                 const data = await response.json();
                 if (response.ok) {
                     console.log('Upload successful:', data);
-                    onUploadComplete(videoTitle, data.filePath); 
+                    // Вместо setStep, вызываем onUploadComplete
+                    onUploadComplete(videoTitle, data.filePath); // Передаем название и путь к файлу на сервере
                 } else {
                     alert(`Upload failed: ${data.message || response.statusText}`);
                 }
@@ -34,23 +34,28 @@ const Upload = () => {
         }
     };
 
-  return (
-    <div>
-        <Card>
-            <CardContent>
-                <label style={{fontSize: '150%'}} >Upload Video file</label> <br /> <br />
-                <Input type='file' accept="video/*" sx={{width: '100%'}} ></Input>  <br /> <br />
-                <Input 
-                    placeholder="Video Title"
-                    sx={{width: '100%'}}
-                    value={videoTitle}
-                    onChange={(e) => setVideoTitle(e.target.value)}
-                /> <br /> <br />
-                <Button onClick={() => setStep("edit")} variant='contained' >Next: Edit</Button>
-            </CardContent>
-        </Card>
-    </div>
-  )
+    return (
+        <div>
+            <Card>
+                <CardContent>
+                    <label style={{ fontSize: '150%' }} >Upload Video file</label> <br /> <br />
+                    <Input
+                        type='file'
+                        accept="video/*"
+                        sx={{ width: '100%' }}
+                        inputRef={fileInputRef}
+                    />  <br /> <br />
+                    <Input
+                        placeholder="Video Title"
+                        sx={{ width: '100%' }}
+                        value={videoTitle}
+                        onChange={(e) => setVideoTitle(e.target.value)}
+                    /> <br /> <br />
+                    <Button onClick={handleNextClick} variant='contained' >Next: Edit</Button>
+                </CardContent>
+            </Card>
+        </div>
+    )
 }
 
-export default Upload
+export default Upload;

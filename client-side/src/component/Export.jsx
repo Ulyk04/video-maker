@@ -1,31 +1,30 @@
-import React from 'react'
-import { Card, CardContent } from '@mui/material'
-import { Button } from '@mui/material'
-import { motion } from 'framer-motion'
-import { CheckCircle } from '@mui/icons-material'
+// client-side/src/component/Export.jsx
+import React from 'react';
+import { Card, CardContent, Typography } from '@mui/material';
 
-const Export = () => {
-
-  const [videoTitle, setVideoTitle] = React.useState('')
+const Export = ({ finalEditedVideoUrl }) => { // Можете принять URL, если он нужен для экспорта
   return (
-    <div>
-      <Card>
-            <CardContent style={{textAlign: 'center'}}>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="text-green-600 flex justify-center"
-              >
-                <CheckCircle sx={{width: 100, height: 100 , mr: 2}} />
-              </motion.div>
-              <h2 className="text-xl font-semibold">Ready to Export!</h2>
-              <p className="text-sm text-gray-500">Your video "{videoTitle || "Untitled"}" is ready.</p>
-              <Button variant="contained">Download Video</Button>
-            </CardContent>
-          </Card>
-    </div>
-  )
-}
+    <Card>
+      <CardContent>
+        <Typography variant="h5" component="div">
+          Export Your Video
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          Your video is ready for export!
+        </Typography>
+        {finalEditedVideoUrl && (
+          <div style={{ marginTop: '20px' }}>
+            <Typography>Processed Video:</Typography>
+            <video src={finalEditedVideoUrl} controls style={{ maxWidth: '100%' }} />
+            <a href={finalEditedVideoUrl} download>Download Video</a>
+          </div>
+        )}
+        <Typography sx={{ mt: 2 }}>
+          (Implement actual export options here, e.g., different formats, cloud storage)
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};
 
-export default Export
+export default Export;
