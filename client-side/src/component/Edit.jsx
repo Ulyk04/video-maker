@@ -1,5 +1,6 @@
 import { Card, CardContent , Button } from '@mui/material'
 import React from 'react'
+import VideoEditor from './VideoEditor';
 
 const Edit = () => {
   const Edit = ({ videoTitle, setStep, uploadedVideoFile }) => { 
@@ -17,7 +18,9 @@ const Edit = () => {
       setStep("export"); 
     };
   
-    // ...
+    const handleCancelEdits = () => {
+      setIsEditing(false);
+    }
   
     if (isEditing) {
       return (
@@ -34,16 +37,17 @@ const Edit = () => {
       <div>
         <Card>
           <CardContent>
-          
-            {finalEditedVideoUrl && (
-              <div>
-                <p>Video has been edited and processed on the server.</p>
-                <video src={finalEditedVideoUrl} controls style={{ maxWidth: '100%' }} />
-              </div>
-            )}
-            <Button variant='contained' onClick={handleEditClick}>Edit</Button>
-            <br /> <br />
-            <Button onClick={() => setStep("export")} variant='contained'>Next: Export</Button>
+              <p style={{ fontSize: '150%' }}>Click "Edit" to customize your video.</p>
+
+              {finalEditedVideoUrl && (
+                <div>
+                  <p>Video has been edited and processed on the server.</p>
+                  <video src={finalEditedVideoUrl} controls style={{ maxWidth: '100%' }} />
+                </div>
+              )}
+              <Button variant='contained' onClick={handleEditClick}>Edit</Button>
+              <br /> <br />
+              <Button onClick={() => setStep("export")} variant='contained'>Next: Export</Button>
           </CardContent>
         </Card>
       </div>
