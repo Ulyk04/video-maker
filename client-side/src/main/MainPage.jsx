@@ -114,8 +114,14 @@ function DashboardLayoutBranding(props) {
 
   const handleEditComplete = (editedVideoUrl) => {
     console.log('Editing complete. Edited video URL:', editedVideoUrl);
-    router.push('/export');
     setFinalEditedVideoUrl(editedVideoUrl);
+    if( router && typeof router.push === 'function'){
+      router.push('/export');
+    } else{
+      console.error('Router is not defined or does not have a push method' , router);
+      alert('Navigation error')
+    }
+    
   }
 
   return (
@@ -127,7 +133,7 @@ function DashboardLayoutBranding(props) {
         branding={{
           logo: <img src="https://mui.com/static/logo.png" alt="MUI logo" />,
           title: 'MUI',
-          homeUrl: '/toolpad/core/introduction',
+          homeUrl: '/upload',
         }}
         router={router}
         theme={demoTheme}
@@ -147,7 +153,7 @@ function DashboardLayoutBranding(props) {
                     )
                   }
                 </Grid>
-                <Grid>
+                <Grid item xs={12} sm={8} md={6} lg={4} >
                   {
                     router.pathname === '/edit' && (
                       <Edit
@@ -159,7 +165,7 @@ function DashboardLayoutBranding(props) {
                     )
                   }
                 </Grid>
-                <Grid>
+                <Grid  item xs={12} sm={8} md={6} lg={4} >
                   {
                   router.pathname === '/export' && (
                     <Export

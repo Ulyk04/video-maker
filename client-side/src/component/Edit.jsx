@@ -47,8 +47,8 @@ const Edit = ({ videoTitle, uploadedVideoFile, onEditComplete }) => {
           )}
           <Button variant='contained' onClick={handleEditClick}>Edit</Button>
           <br /> <br />
-         
-          <Button onClick={() => onEditComplete(finalEditedVideoUrl)} variant='contained'>Next: Export</Button>
+          {finalEditedVideoUrl && (<Button onClick={() => onEditComplete(finalEditedVideoUrl)} variant='contained'>Next: Export</Button>
+        )}
         </CardContent>
       </Card>
     </div>
