@@ -1,8 +1,8 @@
-// client-side/src/component/Export.jsx
+
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 
-const Export = ({ finalEditedVideoUrl }) => { // Можете принять URL, если он нужен для экспорта
+const Export = ({ finalEditedVideoUrl }) => { 
   return (
     <Card>
       <CardContent>

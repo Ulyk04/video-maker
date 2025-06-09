@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, Input } from '@mui/material'
 import React from 'react'
 
-// Принимаем пропсы из родительского компонента
+
 const Upload = ({ videoTitle, setVideoTitle, onUploadComplete }) => {
     const fileInputRef = React.useRef(null);
 
@@ -20,8 +20,8 @@ const Upload = ({ videoTitle, setVideoTitle, onUploadComplete }) => {
                 const data = await response.json();
                 if (response.ok) {
                     console.log('Upload successful:', data);
-                    // Вместо setStep, вызываем onUploadComplete
-                    onUploadComplete(videoTitle, data.filePath); // Передаем название и путь к файлу на сервере
+                   
+                    onUploadComplete(videoTitle, data.filePath); 
                 } else {
                     alert(`Upload failed: ${data.message || response.statusText}`);
                 }

@@ -2,7 +2,7 @@ import { Card, CardContent, Button } from '@mui/material';
 import React from 'react';
 import VideoEditor from './VideoEditor';
 
-// Принимаем onEditComplete в пропсах
+
 const Edit = ({ videoTitle, uploadedVideoFile, onEditComplete }) => {
   const [isEditing, setIsEditing] = React.useState(false);
   const [finalEditedVideoUrl, setFinalEditedVideoUrl] = React.useState('');
@@ -15,7 +15,7 @@ const Edit = ({ videoTitle, uploadedVideoFile, onEditComplete }) => {
     console.log('Edits applied. Edited video URL:', editedVideoUrl);
     setFinalEditedVideoUrl(editedVideoUrl);
     setIsEditing(false);
-    onEditComplete(editedVideoUrl); // Вызываем onEditComplete для перехода к экспорту
+    onEditComplete(editedVideoUrl); 
   };
 
   const handleCancelEdits = () => {
@@ -47,7 +47,7 @@ const Edit = ({ videoTitle, uploadedVideoFile, onEditComplete }) => {
           )}
           <Button variant='contained' onClick={handleEditClick}>Edit</Button>
           <br /> <br />
-          {/* Кнопка "Next: Export" теперь просто переходит, без вызова setStep напрямую */}
+         
           <Button onClick={() => onEditComplete(finalEditedVideoUrl)} variant='contained'>Next: Export</Button>
         </CardContent>
       </Card>
