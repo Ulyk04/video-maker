@@ -93,6 +93,25 @@ Before you begin, ensure you have the following installed:
 
 ---
 
+## Screenshots
+
+---
+
+| Home Page (Light Theme) | Home Page (Dark Theme) |
+| :---------------------- | :--------------------- |
+| ![Screenshot of Home Page Light Theme](https://raw.githubusercontent.com/Ulyk04/music-platform/main/home-light.jpeg) | ![Screenshot of Home Page Dark Theme](https://raw.githubusercontent.com/Ulyk04/music-platform/main/home-dark.jpeg) |
+
+| Library Page | Create Playlist Page |
+| :----------- | :------------------- |
+| ![Screenshot of Library Page](https://raw.githubusercontent.com/Ulyk04/music-platform/main/library.jpeg) | ![Screenshot of Create Playlist Page](https://raw.githubusercontent.com/Ulyk04/music-platform/main/playlist.jpeg) |
+
+| Mobile View | Music Player |
+| :---------- | :----------- |
+| ![Screenshot of Mobile View](https://raw.githubusercontent.com/Ulyk04/music-platform/main/mobile.jpeg) | ![Screenshot of Music Player](https://raw.githubusercontent.com/Ulyk04/music-platform/main/create.jpeg) |
+
+*(Create an `images` folder in your repository root and place your screenshots there. Update the paths accordingly.)*
+
+
 ## Running the Application
 
 You'll need to run both the backend server and the frontend React application simultaneously.
